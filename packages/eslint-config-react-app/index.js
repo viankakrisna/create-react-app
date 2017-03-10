@@ -221,6 +221,7 @@ module.exports = {
     ],
     'react/jsx-uses-react': 'warn',
     'react/jsx-uses-vars': 'warn',
+    'react/jsx-no-target-blank': 'warn',
     'react/no-danger-with-children': 'warn',
     'react/no-deprecated': 'warn',
     'react/no-direct-mutation-state': 'warn',
