@@ -107,7 +107,7 @@ module.exports = {
               // @remove-on-eject-end
               cache: true,
             },
-            loader: 'eslint-loader-fs-cache',
+            loader: 'eslint-loader',
           },
         ],
         include: paths.appSrc,
