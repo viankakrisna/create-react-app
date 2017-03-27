@@ -124,7 +124,7 @@ module.exports = Object.assign(common, {
               // TODO: consider separate config for production,
               // e.g. to enable no-console and no-debugger only in production.
               baseConfig: {
-                extends: ['react-app'],
+                extends: ['react-app-extra'],
               },
               useEslintrc: false,
               // @remove-on-eject-end

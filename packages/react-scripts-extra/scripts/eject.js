@@ -156,13 +156,13 @@ prompt(
   // Add Babel config
   console.log(`  Adding ${cyan('Babel')} preset`);
   appPackage.babel = {
-    presets: ['react-app'],
+    presets: ['react-app-extra'],
   };
 
   // Add ESlint config
   console.log(`  Adding ${cyan('ESLint')} configuration`);
   appPackage.eslintConfig = {
-    extends: 'react-app',
+    extends: 'react-app-extra',
   };
 
   fs.writeFileSync(

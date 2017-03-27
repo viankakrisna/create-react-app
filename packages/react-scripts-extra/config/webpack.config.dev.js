@@ -124,7 +124,7 @@ module.exports = Object.assign(common, {
             options: {
               // @remove-on-eject-begin
               baseConfig: {
-                extends: ['react-app'],
+                extends: ['react-app-extra'],
               },
               useEslintrc: false,
               // @remove-on-eject-end
