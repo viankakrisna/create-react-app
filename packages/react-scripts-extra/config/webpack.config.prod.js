@@ -84,8 +84,8 @@ module.exports = Object.assign(common, {
     // We read `NODE_PATH` environment variable in `paths.js` and pass paths here.
     // We placed these paths second because we want `node_modules` to "win"
     // if there are any conflicts. This matches Node resolution mechanism.
-    // https://github.com/viankakrisna/create-react-app-extra/issues/253
-    modules: ['node_modules'].concat(paths.nodePaths),
+    // https://github.com/facebookincubator/create-react-app/issues/253
+    modules: ['node_modules', paths.appNodeModules].concat(paths.nodePaths),
     // These are the reasonable defaults supported by the Node ecosystem.
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
@@ -121,9 +121,11 @@ module.exports = Object.assign(common, {
         use: [
           {
             options: {
-              // @remove-on-eject-begin
-              // Point ESLint to our predefined config.
-              configFile: require.resolve('../eslintrc'),
+              // TODO: consider separate config for production,
+              // e.g. to enable no-console and no-debugger only in production.
+              baseConfig: {
+                extends: ['react-app'],
+              },
               useEslintrc: false,
               // @remove-on-eject-end
               cache: true,

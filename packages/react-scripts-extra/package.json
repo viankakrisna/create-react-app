@@ -11,8 +11,6 @@
     "url": "https://github.com/viankakrisna/create-react-app-extra/issues"
   },
   "files": [
-    "babelrc",
-    "eslintrc",
     "bin",
     "config",
     "scripts",
@@ -23,7 +21,7 @@
     "react-scripts-extra": "./bin/react-scripts-extra.js"
   },
   "dependencies": {
-    "autoprefixer": "6.7.5",
+    "autoprefixer": "6.7.7",
     "babel-core": "6.23.1",
     "babel-eslint": "7.1.1",
     "babel-jest": "18.0.0",
@@ -36,12 +34,12 @@
     "chalk": "1.1.3",
     "connect-history-api-fallback": "1.3.0",
     "cross-spawn": "4.0.2",
-    "css-loader": "0.26.2",
-    "detect-port": "1.1.0",
+    "css-loader": "0.27.3",
+    "detect-port": "1.1.1",
     "dotenv": "2.0.0",
     "eslint": "3.16.1",
     "eslint-config-react-app-extra": "^0.6.5",
-    "eslint-loader-fs-cache": "1.6.7",
+    "eslint-loader": "1.7.0",
     "eslint-plugin-flowtype": "2.21.0",
     "eslint-plugin-import": "2.0.1",
     "eslint-plugin-jsx-a11y": "4.0.0",
@@ -62,14 +60,14 @@
     "recursive-readdir": "2.1.1",
     "sass-loader": "^6.0.2",
     "strip-ansi": "3.0.1",
-    "style-loader": "0.13.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.5.0",
+    "style-loader": "0.16.0",
     "url-loader": "0.5.8",
-    "webpack": "2.2.1",
-    "webpack-dev-server": "2.4.1",
+    "webpack": "2.3.2",
+    "webpack-dev-server": "2.4.2",
     "webpack-manifest-plugin": "1.1.0",
-    "whatwg-fetch": "2.0.2"
+    "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
     "react": "^15.3.0",

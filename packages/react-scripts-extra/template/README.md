@@ -1539,11 +1539,11 @@ See this [blog post](https://medium.com/@omgwtfmarc/deploying-create-react-app-e
 
 ### Surge
 
-Install the Surge CLI if you haven’t already by running `npm install -g surge`. Run the `surge` command and log in you or create a new account. You just need to specify the *build* folder and your custom domain, and you are done.
+Install the Surge CLI if you haven’t already by running `npm install -g surge`. Run the `surge` command and log in you or create a new account.
+
+When asked about the project path, make sure to specify the `build` folder, for example:
 
 ```sh
-              email: email@domain.com
-           password: ********
        project path: /path/to/project/build
                size: 7 files, 1.8 MB
              domain: create-react-app-extra.surge.sh
