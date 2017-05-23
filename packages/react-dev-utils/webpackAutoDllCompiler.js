@@ -28,99 +28,61 @@ class WebpackAdditionalSourceHashPlugin {
   }
 }
 
-module.exports = ({ mainConfig, dllConfig, paths }) => new Promise(resolve => {
-  const dllHash = getDllHash(paths.dllSrc);
-  if (dllHash === false) {
-    // we cannot find dllSrc.
-    // continue without enabling dll feature.
-    return resolve(mainConfig);
+class WebpackAutoDllCompiler {
+  constructor(options) {
+    this.options = Object.assign({}, options);
   }
+  build() {
+    this.hash = this.getHash();
+    this.config = this.options.config(this.hash);
+    return new Promise(resolve => {
+      if (this.hash === false) {
+        // we cannot find this.options.entry.
+        // continue without enabling dll feature.
+        return resolve(this.options.main);
+      }
+      //start the procedure for building dll bundle
+      clearConsole();
+      this.cacheManifestFile = path.join(
+        this.options.output,
+        this.hash + '.js'
+      );
+      this.cacheFile = path.join(this.options.output, this.hash + '.json');
 
-  //start the procedure for building dll bundle
-  clearConsole();
-  const dllPath = paths.dllPath;
-  const dllBundleFilePath = path.join(dllPath, dllHash + '.js');
-  const dllManifestFilePath = path.join(dllPath, dllHash + '.json');
-  const config = dllConfig(dllHash);
-  console.log('Checking if ' + dllHash + ' dll bundle exists');
-  if (dllExists()) {
-    console.log(chalk.green('Dll bundle is up to date and safe to use!'));
-    // Just run the main compiler if dll bundler is up to date
-    return resolve(resolveConfig(mainConfig));
-  }
-  console.log('Dll bundle needs to be compiled...');
-  // Read dll path for stale files
-  fs.readdir(dllPath, (err, files) => {
-    cleanUpStaleFiles(files);
+      console.log('Checking if ' + this.hash + ' dll bundle exists');
+      if (this.isBundleExists()) {
+        console.log(chalk.green('Dll bundle is up to date and safe to use!'));
+        // Just run the main compiler if dll bundler is up to date
+        return resolve(this.getModifiedMainConfig(this.options.main));
+      }
+      console.log('Dll bundle needs to be compiled...');
+      // Read dll path for stale files
+      fs.readdir(this.options.output, (err, files) => {
+        this.cleanUp(files);
 
-    console.log('Compiling dll bundle for faster rebuilds...');
-    webpack(config).run((err, stats) => {
-      checkForErrors(err, stats);
+        console.log('Compiling dll bundle for faster rebuilds...');
+        webpack(this.config).run((err, stats) => {
+          checkForErrors(err, stats);
 
-      // When the process still run until here, there are no errors :)
-      console.log(chalk.green('Dll bundle compiled successfully!'));
-      resolve(resolveConfig(mainConfig)); // Let the main compiler do its job
-    });
-  });
-
-  function dllExists() {
-    return fs.existsSync(dllManifestFilePath) &&
-      fs.existsSync(dllBundleFilePath);
-  }
-
-  function cleanUpStaleFiles(files) {
-    try {
-      // delete all stale dll bundle for this environment
-      files.filter(file => !file.indexOf(environment)).forEach(file => {
-        fs.unlinkSync(path.join(dllPath, file));
+          // When the process still run until here, there are no errors :)
+          console.log(chalk.green('Dll bundle compiled successfully!'));
+          resolve(this.getModifiedMainConfig(this.options.main)); // Let the main compiler do its job
+        });
       });
-    } catch (ignored) {
-      //ignored
-    }
-  }
-
-  function resolveConfig(mainConfig) {
-    return Object.assign({}, mainConfig, {
-      entry: mainConfig.entry.filter(path => !config.entry.includes(path)),
-      plugins: mainConfig.plugins
-        .concat([
-          new WebpackAdditionalSourceHashPlugin({
-            additionalSourceHash: dllHash,
-          }),
-          new webpack.DllReferencePlugin({
-            context: '.',
-            manifest: require(dllManifestFilePath),
-          }),
-          new AddAssetHtmlPlugin({
-            outputPath: path.join('static', 'js'),
-            publicPath: mainConfig.output.publicPath +
-              path.join('static', 'js'),
-            filepath: require.resolve(dllBundleFilePath),
-          }),
-        ])
-        .map(plugin => {
-          if (plugin.constructor.name === 'ManifestPlugin') {
-            plugin.opts.cache = {
-              'dll.js': path.join('static', 'js', dllHash + '.js'),
-              'dll.js.map': path.join('static', 'js', dllHash + '.js.map'),
-            };
-          }
-          return plugin;
-        }),
     });
   }
 
-  function getDllHash(dllSrc) {
-    if (fs.existsSync(dllSrc)) {
+  getHash() {
+    if (fs.existsSync(this.options.entry)) {
       const hash = crypto.createHash('md5');
-      const input = fs.readFileSync(dllSrc);
-      const appPackageJson = fs.readFileSync(paths.appPackageJson);
+      const input = fs.readFileSync(this.options.entry);
+      const appPackageJson = fs.readFileSync(this.options.packageJsonFile);
 
       hash.update(input);
       hash.update(appPackageJson);
 
-      if (fs.existsSync(paths.yarnLockFile)) {
-        hash.update(fs.readFileSync(paths.yarnLockFile));
+      if (fs.existsSync(this.options.yarnLockFile)) {
+        hash.update(fs.readFileSync(this.options.yarnLockFile));
       }
 
       return [environment, hash.digest('hex').substring(0, 8)].join('.');
@@ -128,7 +90,65 @@ module.exports = ({ mainConfig, dllConfig, paths }) => new Promise(resolve => {
       return false;
     }
   }
-});
+
+  isBundleExists() {
+    return fs.existsSync(this.cacheFile) &&
+      fs.existsSync(this.cacheManifestFile);
+  }
+
+  cleanUp(files) {
+    try {
+      // delete all stale dll bundle for this environment
+      files.filter(file => !file.indexOf(environment)).forEach(file => {
+        fs.unlinkSync(path.join(this.options.output, file));
+      });
+    } catch (ignored) {
+      //ignored
+    }
+  }
+  getModifiedMainConfig() {
+    const main = this.options.main;
+    return Object.assign({}, main, {
+      entry: main.entry.filter(path => !this.config.entry.includes(path)),
+      plugins: main.plugins
+        .concat([
+          new WebpackAdditionalSourceHashPlugin({
+            additionalSourceHash: this.hash,
+          }),
+          new webpack.DllReferencePlugin({
+            context: '.',
+            manifest: require(this.cacheFile),
+          }),
+          new AddAssetHtmlPlugin({
+            outputPath: path.join('static', 'js'),
+            publicPath: main.output.publicPath + path.join('static', 'js'),
+            filepath: require.resolve(this.cacheManifestFile),
+          }),
+        ])
+        .map(plugin => {
+          if (plugin.constructor.name === 'ManifestPlugin') {
+            plugin.opts.cache = {
+              'dll.js': path.join('static', 'js', this.hash + '.js'),
+              'dll.js.map': path.join('static', 'js', this.hash + '.js.map'),
+            };
+          }
+          return plugin;
+        }),
+    });
+  }
+}
+
+module.exports = ({ mainConfig, dllConfig, paths }) => {
+  const webpackAutoDllCompiler = new WebpackAutoDllCompiler({
+    main: mainConfig,
+    config: dllConfig,
+    output: paths.dllPath,
+    entry: paths.dllSrc,
+    packageJsonFile: paths.appPackageJson,
+    yarnLockFile: paths.yarnLockFile,
+  });
+  return webpackAutoDllCompiler.build();
+};
 
 function printErrors(summary, errors) {
   console.log(chalk.red(summary));
