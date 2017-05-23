@@ -50,12 +50,16 @@ class WebpackAutoDllCompiler {
       }
       console.log('Dll bundle needs to be compiled...');
       // Read dll path for stale files
-      this.cachedFiles = fs.readdirSync(this.options.output);
-      this.compile();
+      try {
+        this.cachedFiles = fs.readdirSync(this.options.output);
+      } catch (ignored) {
+        //ignored
+      }
+      this.compile(resolve);
     });
   }
 
-  compile() {
+  compile(resolve) {
     this.cleanUp(this.cachedFiles);
 
     console.log('Compiling dll bundle for faster rebuilds...');
@@ -64,7 +68,7 @@ class WebpackAutoDllCompiler {
 
       // When the process still run until here, there are no errors :)
       console.log(chalk.green('Dll bundle compiled successfully!'));
-      this.resolve(this.getModifiedMainConfig(this.options.main)); // Let the main compiler do its job
+      resolve(this.getModifiedMainConfig(this.options.main)); // Let the main compiler do its job
     });
   }
 
