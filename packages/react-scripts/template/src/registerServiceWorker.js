@@ -65,7 +65,9 @@ export default function register() {
           console.error('Error during service worker registration:', error);
         });
     });
-  } else {
+  }
+
+  if (process.env.NODE_ENV !== 'production') {
     showMessage('Development mode started.');
   }
 }
