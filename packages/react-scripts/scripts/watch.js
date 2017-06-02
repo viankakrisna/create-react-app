@@ -23,15 +23,15 @@ const webpack = require('webpack');
 
 const paths = require('../config/paths');
 
-const clearConsole = require('react-dev-utils/clearConsole');
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
-const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-const inquirer = require('react-dev-utils/inquirer');
+const clearConsole = require('@viankakrisna/react-dev-utils/clearConsole');
+const checkRequiredFiles = require('@viankakrisna/react-dev-utils/checkRequiredFiles');
+const formatWebpackMessages = require('@viankakrisna/react-dev-utils/formatWebpackMessages');
+const inquirer = require('@viankakrisna/react-dev-utils/inquirer');
 
 const cleanBuildFolder = require('../utils/cleanBuildFolder');
 const bundleVendorIfStale = require('../utils/bundleVendorIfStale');
 
-const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
+const FileSizeReporter = require('@viankakrisna/react-dev-utils/FileSizeReporter');
 const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 

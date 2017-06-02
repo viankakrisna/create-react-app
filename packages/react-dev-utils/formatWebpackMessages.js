@@ -45,7 +45,7 @@ function formatMessage(message, isError) {
   lines = lines.filter(function(line) {
     // Webpack adds a list of entry points to warning messages:
     //  @ ./src/index.js
-    //  @ multi react-scripts/~/react-dev-utils/webpackHotDevClient.js ...
+    //  @ multi react-scripts/~/@viankakrisna/react-dev-utils/webpackHotDevClient.js ...
     // It is misleading (and unrelated to the warnings) so we clean it up.
     // It is only useful for syntax errors but we have beautiful frames for them.
     return line.indexOf(' @ ') !== 0;

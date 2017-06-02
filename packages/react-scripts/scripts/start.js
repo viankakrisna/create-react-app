@@ -29,16 +29,16 @@ const chalk = require('chalk');
 const webpack = require('webpack');
 const compose = require('promise-compose');
 const WebpackDevServer = require('webpack-dev-server');
-const clearConsole = require('react-dev-utils/clearConsole');
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
+const clearConsole = require('@viankakrisna/react-dev-utils/clearConsole');
+const checkRequiredFiles = require('@viankakrisna/react-dev-utils/checkRequiredFiles');
 const {
   choosePort,
   createCompiler,
   prepareProxy,
   prepareUrls,
-} = require('react-dev-utils/WebpackDevServerUtils');
-const openBrowser = require('react-dev-utils/openBrowser');
-const webpackAutoDllCompiler = require('react-dev-utils/webpackAutoDllCompiler');
+} = require('@viankakrisna/react-dev-utils/WebpackDevServerUtils');
+const openBrowser = require('@viankakrisna/react-dev-utils/openBrowser');
+const webpackAutoDllCompiler = require('@viankakrisna/react-dev-utils/webpackAutoDllCompiler');
 const paths = require('../config/paths');
 const config = require('../config/webpack.config.dev');
 const dllConfig = require('../config/webpack.config.dll');

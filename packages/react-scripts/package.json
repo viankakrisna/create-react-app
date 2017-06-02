@@ -58,7 +58,7 @@
     "postcss-loader": "2.0.5",
     "promise": "7.1.1",
     "promise-compose": "^1.1.2",
-    "react-dev-utils": "^3.0.0",
+    "@viankakrisna/react-dev-utils": "^3.0.0",
     "react-error-overlay": "^1.0.7",
     "recursive-readdir": "2.1.1",
     "sass-loader": "^6.0.2",
