@@ -1,6 +1,6 @@
 {
   "name": "@viankakrisna/react-error-overlay",
-  "version": "1.0.7",
+  "version": "0.0.1",
   "description": "An overlay for displaying stack frames.",
   "main": "lib/index.js",
   "scripts": {
