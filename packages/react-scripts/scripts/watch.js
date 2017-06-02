@@ -32,7 +32,8 @@ const cleanBuildFolder = require('../utils/cleanBuildFolder');
 const bundleVendorIfStale = require('../utils/bundleVendorIfStale');
 
 const FileSizeReporter = require('@viankakrisna/react-dev-utils/FileSizeReporter');
-const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;
+const measureFileSizesBeforeBuild =
+  FileSizeReporter.measureFileSizesBeforeBuild;
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 
 const useYarn = fs.existsSync(paths.yarnLockFile);

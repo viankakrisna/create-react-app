@@ -13,14 +13,11 @@ export default class Toast extends React.Component {
     });
   };
   componentDidMount() {
-    this.timeout = setTimeout(
-      () => {
-        this.setState({
-          active: false,
-        });
-      },
-      this.props.timeout
-    );
+    this.timeout = setTimeout(() => {
+      this.setState({
+        active: false,
+      });
+    }, this.props.timeout);
   }
   componentWillUnmount() {
     clearTimeout(this.timeout);

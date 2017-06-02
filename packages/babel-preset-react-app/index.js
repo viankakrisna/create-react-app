@@ -10,7 +10,8 @@
 
 const plugins = [
   // class { handleClick = () => { } }
-  require.resolve('babel-plugin-transform-class-properties'),
+  require
+    .resolve('babel-plugin-transform-class-properties'),
   // The following two plugins use Object.assign directly, instead of Babel's
   // extends helper. Note that this assumes `Object.assign` is available.
   // { ...todo, completed: true }
@@ -64,9 +65,11 @@ if (env === 'development' || env === 'test') {
   // https://github.com/facebookincubator/create-react-app/issues/989
   plugins.push.apply(plugins, [
     // Adds component stack to warning messages
-    require.resolve('babel-plugin-transform-react-jsx-source'),
+    require
+      .resolve('babel-plugin-transform-react-jsx-source'),
     // Adds __self attribute to JSX which React will use for some warnings
-    require.resolve('babel-plugin-transform-react-jsx-self'),
+    require
+      .resolve('babel-plugin-transform-react-jsx-self'),
   ]);
 }
 
@@ -83,11 +86,13 @@ if (env === 'test') {
         },
       ],
       // JSX, Flow
-      require.resolve('babel-preset-react'),
+      require
+        .resolve('babel-preset-react'),
     ],
     plugins: plugins.concat([
       // Compiles import() to a deferred require()
-      require.resolve('babel-plugin-dynamic-import-node'),
+      require
+        .resolve('babel-plugin-dynamic-import-node'),
     ]),
   };
 } else {
@@ -111,7 +116,8 @@ if (env === 'test') {
         },
       ],
       // JSX, Flow
-      require.resolve('babel-preset-react'),
+      require
+        .resolve('babel-preset-react'),
     ],
     plugins: plugins.concat([
       // function* () { yield 42; yield 43; }
@@ -123,7 +129,8 @@ if (env === 'test') {
         },
       ],
       // Adds syntax support for import()
-      require.resolve('babel-plugin-syntax-dynamic-import'),
+      require
+        .resolve('babel-plugin-syntax-dynamic-import'),
     ]),
   };
 

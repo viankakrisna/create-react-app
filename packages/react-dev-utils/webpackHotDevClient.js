@@ -49,7 +49,8 @@ function addOverlayDivTo(iframe) {
   iframe.contentDocument.body.style.maxWidth = '100vw';
 
   var outerDiv = iframe.contentDocument.createElement('div');
-  outerDiv.id = '@viankakrisna/react-dev-utils-webpack-hot-dev-client-overlay-div';
+  outerDiv.id =
+    '@viankakrisna/react-dev-utils-webpack-hot-dev-client-overlay-div';
   outerDiv.style.width = '100%';
   outerDiv.style.height = '100%';
   outerDiv.style.boxSizing = 'border-box';
@@ -81,14 +82,16 @@ function addOverlayDivTo(iframe) {
 }
 
 function overlayHeaderStyle() {
-  return 'font-size: 2em;' +
+  return (
+    'font-size: 2em;' +
     'font-family: sans-serif;' +
     'color: rgb(206, 17, 38);' +
     'white-space: pre-wrap;' +
     'margin: 0 2rem 0.75rem 0px;' +
     'flex: 0 0 auto;' +
     'max-height: 35%;' +
-    'overflow: auto;';
+    'overflow: auto;'
+  );
 }
 
 var overlayIframe = null;
@@ -127,7 +130,8 @@ function ensureOverlayDivExists(onOverlayDivReady) {
 function showErrorOverlay(message) {
   ensureOverlayDivExists(function onOverlayDivReady(overlayDiv) {
     // TODO: unify this with our runtime overlay
-    overlayDiv.innerHTML = '<div style="' +
+    overlayDiv.innerHTML =
+      '<div style="' +
       overlayHeaderStyle() +
       '">Failed to compile</div>' +
       '<pre style="' +

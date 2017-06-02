@@ -28,8 +28,8 @@ class WebpackAdditionalSourceHashPlugin {
   }
 }
 
-module.exports = ({ dllConfig, paths }) =>
-  mainConfig => new Promise(resolve => {
+module.exports = ({ dllConfig, paths }) => mainConfig =>
+  new Promise(resolve => {
     const dllHash = getDllHash(paths.dllSrc);
     if (dllHash === false) {
       // we cannot find dllSrc.
@@ -65,8 +65,9 @@ module.exports = ({ dllConfig, paths }) =>
     });
 
     function dllExists() {
-      return fs.existsSync(dllManifestFilePath) &&
-        fs.existsSync(dllBundleFilePath);
+      return (
+        fs.existsSync(dllManifestFilePath) && fs.existsSync(dllBundleFilePath)
+      );
     }
 
     function cleanUpStaleFiles(files) {
@@ -94,8 +95,8 @@ module.exports = ({ dllConfig, paths }) =>
             }),
             new AddAssetHtmlPlugin({
               outputPath: path.join('static', 'js'),
-              publicPath: mainConfig.output.publicPath +
-                path.join('static', 'js'),
+              publicPath:
+                mainConfig.output.publicPath + path.join('static', 'js'),
               filepath: require.resolve(dllBundleFilePath),
             }),
           ])

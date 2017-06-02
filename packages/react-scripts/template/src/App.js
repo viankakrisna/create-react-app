@@ -4,11 +4,12 @@ import s from '~/App.css';
 
 // decorators
 function addProps(props) {
-  return Component => class AddedProps extends React.Component {
-    render() {
-      return <Component {...props} />;
-    }
-  };
+  return Component =>
+    class AddedProps extends React.Component {
+      render() {
+        return <Component {...props} />;
+      }
+    };
 }
 
 @addProps({ name: 'Foo Bar' })
