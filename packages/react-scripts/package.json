@@ -1,5 +1,5 @@
 {
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Configuration and scripts for Create React App with extra features.",
   "repository": "viankakrisna/create-react-app/tree/extra",
   "name": "@viankakrisna/react-scripts",
@@ -21,6 +21,7 @@
     "react-scripts": "./bin/react-scripts.js"
   },
   "dependencies": {
+    "@viankakrisna/react-dev-utils": "^0.0.3",
     "autoprefixer": "7.1.0",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
@@ -58,7 +59,6 @@
     "postcss-loader": "2.0.5",
     "promise": "7.1.1",
     "promise-compose": "^1.1.2",
-    "@viankakrisna/react-dev-utils": "^0.0.2",
     "react-error-overlay": "^1.0.7",
     "recursive-readdir": "2.1.1",
     "sass-loader": "^6.0.2",
