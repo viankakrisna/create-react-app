@@ -2,7 +2,7 @@
   "version": "1.0.7",
   "description": "Configuration and scripts for Create React App.",
   "repository": "facebookincubator/create-react-app",
-  "name": "react-scripts-extra",
+  "name": "@viankakrisna/react-scripts",
   "version": "0.0.11",
   "description": "Configuration and scripts for Create React App with extra features.",
   "repository": "viankakrisna/create-react-app/tree/extra",
@@ -21,7 +21,7 @@
     "utils"
   ],
   "bin": {
-    "react-scripts-extra": "./bin/react-scripts-extra.js"
+    "react-scripts": "./bin/react-scripts.js"
   },
   "dependencies": {
     "autoprefixer": "7.1.0",
