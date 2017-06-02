@@ -40,7 +40,7 @@ module.exports = {
   // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
   devtool: 'cheap-module-source-map',
   // These are the "entry points" to our application.
-  // This means they will be the "root" imports that are included in JS bundle.
+  // This means they will be the "root" imports that are included in JS babel-plugin-transform-decorators-legacy.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
   entry: [
     // Include an alternative client for WebpackDevServer. A client's job is to
@@ -105,6 +105,7 @@ module.exports = {
         require.resolve('babel-runtime/package.json')
       ),
       // @remove-on-eject-end
+      '~': path.resolve(paths.appSrc),
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -141,11 +142,24 @@ module.exports = {
               ignore: false,
               useEslintrc: false,
               // @remove-on-eject-end
+              cache: true,
             },
             loader: require.resolve('eslint-loader'),
           },
         ],
         include: paths.appSrc,
+      },
+      {
+        test: /(\.scss|\.sass)$/,
+        loader: 'style!css!postcss!sass',
+      },
+      {
+        test: /\.less$/,
+        loader: 'style!css!postcss!less',
+      },
+      {
+        test: /\.styl/,
+        loader: 'style!css!postcss!stylus',
       },
       // ** ADDING/UPDATING LOADERS **
       // The "file" loader handles all assets unless explicitly excluded.
@@ -161,6 +175,9 @@ module.exports = {
           /\.html$/,
           /\.(js|jsx)$/,
           /\.css$/,
+          /(\.scss|\.sass)$/,
+          /\.less$/,
+          /\.styl$/,
           /\.json$/,
           /\.bmp$/,
           /\.gif$/,
@@ -191,7 +208,13 @@ module.exports = {
         options: {
           // @remove-on-eject-begin
           babelrc: false,
-          presets: [require.resolve('babel-preset-react-app')],
+          presets: [
+            require.resolve('babel-preset-react-app'),
+            require.resolve('babel-preset-stage-0'),
+          ],
+          plugins: [
+            require.resolve('babel-plugin-transform-decorators-legacy'),
+          ],
           // @remove-on-eject-end
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -212,6 +235,9 @@ module.exports = {
             loader: require.resolve('css-loader'),
             options: {
               importLoaders: 1,
+              modules: 1,
+              camelCase: 1,
+              localIdentName: '[name]_[local]_[hash:base64:5]',
             },
           },
           {

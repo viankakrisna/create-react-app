@@ -1,8 +1,8 @@
-"use strict";
-var recursive = require("recursive-readdir");
-var path = require("path");
-var fs = require("fs");
-var difference = require("lodash/difference");
+'use strict';
+var recursive = require('recursive-readdir');
+var path = require('path');
+var fs = require('fs');
+var difference = require('lodash/difference');
 
 module.exports = function cleanBuildFolder(appBuild, stats) {
   return new Promise(resolve => {
@@ -14,9 +14,11 @@ module.exports = function cleanBuildFolder(appBuild, stats) {
         .filter(Boolean);
 
       // Check the differences in hash
-      var differences = difference(fileNames,assetFileNames)
-        .filter((names) => names.includes(path.join(appBuild, 'static')))
-        // Only delete in the static folder
+      var differences = difference(
+        fileNames,
+        assetFileNames
+      ).filter(names => names.includes(path.join(appBuild, 'static')));
+      // Only delete in the static folder
 
       differences.forEach(file => {
         if (fs.existsSync(file)) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Toast.css';
+import styles from './Toast.css';
 
 export default class Toast extends React.Component {
   state = {
@@ -27,11 +27,18 @@ export default class Toast extends React.Component {
   }
   render() {
     return (
-      <div className={`Toast ${this.state.active ? 'active' : 'inactive'}`}>
-        <span className="Toast-text">
+      <div
+        className={[
+          styles.Toast,
+          this.state.active ? styles.active : styles.inactive,
+        ].join(' ')}
+      >
+        <span className={styles.ToastText}>
           {this.props.children}
         </span>
-        <button className="Toast-button" onClick={this.close}>Dismiss</button>
+        <button className={styles.ToastButton} onClick={this.close}>
+          Dismiss
+        </button>
       </div>
     );
   }

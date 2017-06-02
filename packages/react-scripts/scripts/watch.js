@@ -21,14 +21,15 @@ const chalk = require('chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
 
-const config = require('../config/webpack.config.watch');
 const paths = require('../config/paths');
 
 const clearConsole = require('react-dev-utils/clearConsole');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-const cleanBuildFolder = require('react-dev-utils/cleanBuildFolder');
-const prompt = require('react-dev-utils/prompt');
+const inquirer = require('react-dev-utils/inquirer');
+
+const cleanBuildFolder = require('../utils/cleanBuildFolder');
+const bundleVendorIfStale = require('../utils/bundleVendorIfStale');
 
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
 const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;
@@ -52,7 +53,7 @@ Also, don't deploy the code before running npm run build.
 Continue running in watching mode?`;
 
 clearConsoleIfInteractive();
-prompt(question, true).then(accept => {
+inquirer(question, true).then(accept => {
   if (accept) {
     run();
   } else {
@@ -73,12 +74,15 @@ function run() {
 
 function watch(previousFileSizes) {
   clearConsoleIfInteractive();
-  const watcher = webpack(config, () => {});
-  const compiler = watcher.compiler;
+  bundleVendorIfStale(() => {
+    const config = require('../config/webpack.config.watch');
+    const watcher = webpack(config, () => {});
+    const compiler = watcher.compiler;
 
-  echo('Compiling ' + process.env.NODE_ENV + ' build...');
-  compiler.plugin('done', createCompilerDoneHandler(previousFileSizes));
-  compiler.plugin('invalid', handleCompilerInvalid);
+    echo('Compiling ' + process.env.NODE_ENV + ' build...');
+    compiler.plugin('done', createCompilerDoneHandler(previousFileSizes));
+    compiler.plugin('invalid', handleCompilerInvalid);
+  });
 }
 
 function handleCompilerInvalid() {

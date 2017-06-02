@@ -23,7 +23,7 @@
 }
 
 .Toast a,
-.Toast-button {
+.ToastButton {
 	padding: 0;
 	background: transparent;
 	border: 0;
@@ -34,6 +34,6 @@
 	text-decoration: none;
 }
 
-.Toast-text {
+.ToastText {
 	flex: 1;
 }
