@@ -53,14 +53,11 @@ module.exports = {
     // the line below with these two lines if you prefer the stock client:
     // require.resolve('webpack-dev-server/client') + '?/',
     // require.resolve('webpack/hot/dev-server'),
-    require
-      .resolve('@viankakrisna/react-dev-utils/webpackHotDevClient'),
+    require.resolve('@viankakrisna/react-dev-utils/webpackHotDevClient'),
     // We ship a few polyfills by default:
-    require
-      .resolve('./polyfills'),
+    require.resolve('./polyfills'),
     // Errors should be considered fatal in development
-    require
-      .resolve('react-error-overlay'),
+    require.resolve('react-error-overlay'),
     // Finally, this is your app's code:
     paths.appIndexJs,
     // We include the app code last so that if there is a runtime error during
@@ -212,7 +209,7 @@ module.exports = {
           // @remove-on-eject-begin
           babelrc: false,
           presets: [
-            require.resolve('babel-preset-react-app'),
+            require.resolve('@viankakrisna/babel-preset-react-app'),
             require.resolve('babel-preset-stage-0'),
           ],
           plugins: [

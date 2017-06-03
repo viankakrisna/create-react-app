@@ -193,7 +193,7 @@ module.exports = {
         options: {
           babelrc: false,
           presets: [
-            require.resolve('babel-preset-react-app'),
+            require.resolve('@viankakrisna/babel-preset-react-app'),
             require.resolve('babel-preset-stage-0'),
           ],
           plugins: [
