@@ -1,6 +1,6 @@
 {
   "name": "@viankakrisna/react-scripts",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Configuration and scripts for Create React App.",
   "repository": "facebookincubator/create-react-app",
   "license": "BSD-3-Clause",
@@ -22,8 +22,8 @@
   },
   "dependencies": {
     "@viankakrisna/babel-preset-react-app": "latest",
-    "@viankakrisna/react-dev-utils": "latest",
     "@viankakrisna/eslint-config-react-app": "latest",
+    "@viankakrisna/react-dev-utils": "latest",
     "autoprefixer": "7.1.1",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
