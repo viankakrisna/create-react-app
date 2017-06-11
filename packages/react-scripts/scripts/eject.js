@@ -22,8 +22,8 @@ const execSync = require('child_process').execSync;
 const chalk = require('chalk');
 const paths = require('../config/paths');
 const createJestConfig = require('./utils/createJestConfig');
-const inquirer = require('react-dev-utils/inquirer');
-const spawnSync = require('react-dev-utils/crossSpawn').sync;
+const inquirer = require('@viankakrisna/react-dev-utils/inquirer');
+const spawnSync = require('@viankakrisna/react-dev-utils/crossSpawn').sync;
 
 const green = chalk.green;
 const cyan = chalk.cyan;
@@ -127,12 +127,12 @@ inquirer
       content = content
         // Remove dead code from .js files on eject
         .replace(
-          /\/\/ @remove-on-eject-begin([\s\S]*?)\/\/ @remove-on-eject-end/mg,
+          /\/\/ @remove-on-eject-begin([\s\S]*?)\/\/ @remove-on-eject-end/gm,
           ''
         )
         // Remove dead code from .applescript files on eject
         .replace(
-          /-- @remove-on-eject-begin([\s\S]*?)-- @remove-on-eject-end/mg,
+          /-- @remove-on-eject-begin([\s\S]*?)-- @remove-on-eject-end/gm,
           ''
         )
         .trim() + '\n';

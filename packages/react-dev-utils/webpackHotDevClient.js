@@ -28,7 +28,7 @@ var entities = new Entities();
 
 function createOverlayIframe(onIframeLoad) {
   var iframe = document.createElement('iframe');
-  iframe.id = 'react-dev-utils-webpack-hot-dev-client-overlay';
+  iframe.id = '@viankakrisna/react-dev-utils-webpack-hot-dev-client-overlay';
   iframe.src = 'about:blank';
   iframe.style.position = 'fixed';
   iframe.style.left = 0;
@@ -49,7 +49,7 @@ function addOverlayDivTo(iframe) {
   iframe.contentDocument.body.style.maxWidth = '100vw';
 
   var outerDiv = iframe.contentDocument.createElement('div');
-  outerDiv.id = 'react-dev-utils-webpack-hot-dev-client-overlay-div';
+  outerDiv.id = '@viankakrisna/react-dev-utils-webpack-hot-dev-client-overlay-div';
   outerDiv.style.width = '100%';
   outerDiv.style.height = '100%';
   outerDiv.style.boxSizing = 'border-box';

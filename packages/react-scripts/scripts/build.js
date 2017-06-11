@@ -31,11 +31,11 @@ const webpack = require('webpack');
 const config = require('../config/webpack.config.prod');
 const dllConfig = require('../config/webpack.config.dll');
 const paths = require('../config/paths');
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
-const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
-const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
-const webpackAutoDllCompiler = require('react-dev-utils/webpackAutoDllCompiler');
+const checkRequiredFiles = require('@viankakrisna/react-dev-utils/checkRequiredFiles');
+const formatWebpackMessages = require('@viankakrisna/react-dev-utils/formatWebpackMessages');
+const printHostingInstructions = require('@viankakrisna/react-dev-utils/printHostingInstructions');
+const FileSizeReporter = require('@viankakrisna/react-dev-utils/FileSizeReporter');
+const webpackAutoDllCompiler = require('@viankakrisna/react-dev-utils/webpackAutoDllCompiler');
 const compose = require('promise-compose');
 
 const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;

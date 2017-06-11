@@ -15,6 +15,12 @@ const plugins = [
   // extends helper. Note that this assumes `Object.assign` is available.
   // { ...todo, completed: true }
   [
+    require.resolve('babel-plugin-styled-components'),
+    {
+      ssr: true,
+    },
+  ],
+  [
     require.resolve('babel-plugin-transform-object-rest-spread'),
     {
       useBuiltIns: true,

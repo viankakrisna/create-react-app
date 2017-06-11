@@ -16,10 +16,10 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const InterpolateHtmlPlugin = require('@viankakrisna/react-dev-utils/InterpolateHtmlPlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const eslintFormatter = require('@viankakrisna/react-dev-utils/eslintFormatter');
+const ModuleScopePlugin = require('@viankakrisna/react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 
@@ -103,6 +103,7 @@ module.exports = {
         require.resolve('babel-runtime/package.json')
       ),
       // @remove-on-eject-end
+      '~': path.resolve(paths.appSrc),
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -140,6 +141,8 @@ module.exports = {
               },
               ignore: false,
               useEslintrc: false,
+              cache: true,
+
               // @remove-on-eject-end
             },
             loader: require.resolve('eslint-loader'),
@@ -189,7 +192,13 @@ module.exports = {
         // @remove-on-eject-begin
         options: {
           babelrc: false,
-          presets: [require.resolve('babel-preset-react-app')],
+          presets: [
+            require.resolve('@viankakrisna/babel-preset-react-app'),
+            require.resolve('babel-preset-stage-0'),
+          ],
+          plugins: [
+            require.resolve('babel-plugin-transform-decorators-legacy'),
+          ],
         },
         // @remove-on-eject-end
       },
@@ -338,6 +347,7 @@ module.exports = {
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
+
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
   node: {
