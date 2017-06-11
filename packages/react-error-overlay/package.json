@@ -35,28 +35,18 @@
     "anser": "1.4.1",
     "babel-code-frame": "6.22.0",
     "babel-runtime": "6.23.0",
-<<<<<<< HEAD
-    "react-dev-utils": "^3.0.1",
-=======
->>>>>>> 5e88c37495021bc180914027c41f53ac9ceb4af8
     "settle-promise": "1.0.0",
     "source-map": "0.5.6"
   },
   "devDependencies": {
+    "@viankakrisna/babel-preset-react-app": "latest",
+    "@viankakrisna/eslint-config-react-app": "latest",
     "babel-cli": "6.24.1",
     "babel-eslint": "7.2.3",
-    "babel-preset-react-app": "^3.0.1",
     "cross-env": "5.0.0",
     "eslint": "3.19.0",
-<<<<<<< HEAD
-    "eslint-config-react-app": "^1.0.5",
-    "eslint-plugin-flowtype": "2.33.0",
-    "eslint-plugin-import": "2.2.0",
-=======
-    "@viankakrisna/eslint-config-react-app": "^1.0.4",
     "eslint-plugin-flowtype": "2.34.0",
     "eslint-plugin-import": "2.3.0",
->>>>>>> 5e88c37495021bc180914027c41f53ac9ceb4af8
     "eslint-plugin-jsx-a11y": "5.0.3",
     "eslint-plugin-react": "7.0.1",
     "flow-bin": "0.47.0",
