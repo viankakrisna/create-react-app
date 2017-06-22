@@ -13,15 +13,19 @@ const chalk = require('chalk');
 const path = require('path');
 
 class ModuleScopePlugin {
-  constructor(appSrc) {
+  constructor({ appSrc, excludes }) {
     this.appSrc = appSrc;
+    this.excludes = excludes || [];
   }
 
   apply(resolver) {
-    const { appSrc } = this;
+    const { appSrc, excludes } = this;
     resolver.plugin('file', (request, callback) => {
       // Unknown issuer, probably webpack internals
       if (!request.context.issuer) {
+        return callback();
+      }
+      if (excludes.includes(request.path)) {
         return callback();
       }
       if (
@@ -37,10 +41,7 @@ class ModuleScopePlugin {
       // Maybe an indexOf === 0 would be better?
       const relative = path.relative(appSrc, request.context.issuer);
       // If it's not in src/ or a subdirectory, not our request!
-      if (
-        relative.startsWith('../') ||
-        relative.startsWith('..\\')
-      ) {
+      if (relative.startsWith('../') || relative.startsWith('..\\')) {
         return callback();
       }
       // Find path from src to the requested file
@@ -53,8 +54,7 @@ class ModuleScopePlugin {
       );
       // Error if in a parent directory of src/
       if (
-        requestRelative.startsWith('../') ||
-        requestRelative.startsWith('..\\')
+        requestRelative.startsWith('../') || requestRelative.startsWith('..\\')
       ) {
         callback(
           new Error(

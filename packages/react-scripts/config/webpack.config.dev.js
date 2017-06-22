@@ -104,6 +104,7 @@ module.exports = {
       'babel-runtime': path.dirname(
         require.resolve('babel-runtime/package.json')
       ),
+      'package.json': paths.appPackageJson,
       // @remove-on-eject-end
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -115,7 +116,10 @@ module.exports = {
       // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
-      new ModuleScopePlugin(paths.appSrc),
+      new ModuleScopePlugin({
+        appSrc: paths.appSrc,
+        excludes: [paths.appPackageJson],
+      }),
     ],
   },
   module: {
