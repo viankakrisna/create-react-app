@@ -14,6 +14,7 @@ const errorOverlayMiddleware = require('react-error-overlay/middleware');
 const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware');
 const config = require('./webpack.config.dev');
 const paths = require('./paths');
+const path = require('path');
 
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || '0.0.0.0';
@@ -85,6 +86,12 @@ module.exports = function(proxy, allowedHost) {
       // Paths with dots should still use the history fallback.
       // See https://github.com/facebookincubator/create-react-app/issues/387.
       disableDotRule: true,
+      rewrites: paths.appHtmls.map(filename => {
+        return {
+          from: /^\/admin.html/,
+          to: path.basename(filename),
+        };
+      }),
     },
     public: allowedHost,
     proxy,
