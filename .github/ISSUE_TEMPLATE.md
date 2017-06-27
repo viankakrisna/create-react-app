@@ -1,5 +1,5 @@
 <!--
-  PLEASE READ THE FIRST SECTION :-)
+  PLEASE DON'T DELETE THIS TEMPLATE UNTIL YOU HAVE READ THE FIRST SECTION.
 -->
 
 ### Is this a bug report?
@@ -8,20 +8,18 @@
 
 <!--
   If you answered "Yes":
-  
-    Please note that your issue will be fixed much faster if you spend about
-    half an hour preparing it, including the exact reproduction steps and a demo.
-    
-    If you're in a hurry or don't feel confident, it's fine to report bugs with
-    less details, but this makes it less likely they'll get fixed soon.
 
-    In either case, please fill as many fields below as you can.
+    We expect that it will take you about 30 minutes to produce a high-quality bug report.
+    While this may seem like a lot, putting care into issues helps us fix them faster.
+    For bug reports, it is REQUIRED to fill the rest of this template, or the issue will be closed.
 
   If you answered "No":
 
     If this is a question or a discussion, you may delete this template and write in a free form.
     Note that we don't provide help for webpack questions after ejecting.
     You can find webpack docs at https://webpack.js.org/.
+
+  Now scroll below!
 -->
 
 
@@ -44,30 +42,50 @@
   Then try to reproduce the issue again.
   Can you still reproduce it?
 
-  Note: Please try this even if you are using Yarn so that we know whether it's a Yarn-only bug.
+  Note: Please try this even if you are using Yarn. Yarn also has bugs.
 -->
 
 (Write your answer here.)
 
 
-### Which terms did you search for in User Guide?
+### Can you reproduce the problem with the active LTS of node?
 
 <!--
-  There are a few common documented problems, such as watcher not detecting changes, or build failing.
+  A non-LTS node version can be problematic. We try to keep up with the latest node,
+  But if it's near the release date we / our dependencies may still have unfixed bugs. 
+  You can find out which version of node that you are running by doing:
+
+    node -v
+
+  If it's not an LTS according to https://github.com/nodejs/LTS, you can install the
+  LTS from https://nodejs.org/en/download/ or use something like https://github.com/creationix/nvm/ 
+  or https://github.com/tj/n 
+
+  Then try to reproduce the issue again.
+  Can you still reproduce it? 
+  
+  If you cannot, then it's related to node. You can still report it here, 
+  but please share a reproducible project example.
+
+-->
+
+(Write your answer here.)
+
+
+
+### Have you read the Troubleshooting section and searched the User Guide?
+
+<!--
+  There are a few common documented problems, such as watcher not detecting changes.
   They are described in the Troubleshooting section of the User Guide:
 
   https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#troubleshooting
 
-  Please scan these few sections for common problems.
-  Additionally, you can search the User Guide itself for something you're having issues with:
-  
-  https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.me
-  
-  If you didn't find the solution, please share which words you searched for.
-  This helps us improve documentation for future readers who might encounter the same problem.
+  Have you read that section, and have you searched the User Guide for symptoms of your problem?
+  Please write the answer below:
 -->
 
-(Write your answer here if relevant.)
+(Write the terms you searched for on the User Guide page.)
 
 
 ### Environment
@@ -117,18 +135,16 @@ Then, specify:
 <!--
   Did something go wrong?
   Is something broken, or not behaving as you expected?
-  Please attach screenshots if possible! They are extremely helpful for diagnosing issues.
+  Describe this section in detail, and attach screenshots if possible.
 -->
 
-(Write what happened. Please add screenshots!)
+(Write what happened. Add screenshots!)
 
 
 ### Reproducible Demo
 
 <!--
-  If you can, please share a project that reproduces the issue.
-  This is the single most effective way to get an issue fixed soon.
-
+  Please share a project that reproduces the issue.
   There are two ways to do it:
 
     * Create a new app and try to reproduce the issue in it.
@@ -145,13 +161,16 @@ Then, specify:
 
 <!--
   What happens if you skip this step?
-  
-  We will try to help you, but in many cases it is impossible because crucial
-  information is missing. In that case we'll tag an issue as having a low priority,
-  and eventually close it if there is no clear direction.
-  
-  We still appreciate the report though, as eventually somebody else might
-  create a reproducible example for it.
+
+  Someone will read your bug report, and maybe will be able to help you,
+  but it’s unlikely that it will get much attention from the team. Eventually,
+  the issue will likely get closed in favor of issues that have reproducible demos.
+
+  Please remember that:
+
+    * Issues without reproducible demos have a very low priority.
+    * The person fixing the bug would have to do that anyway. Please be respectful of their time.
+    * You might figure out the issues yourself as you work on extracting it.
 
   Thanks for helping us help you!
 -->
