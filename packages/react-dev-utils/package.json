@@ -4,6 +4,11 @@
   "description": "Webpack utilities used by Create React App",
   "repository": "facebookincubator/create-react-app",
   "license": "BSD-3-Clause",
+  "scripts": {
+    "build": "cross-env NODE_ENV=development babel src/ -d ./",
+    "watch": "cross-env NODE_ENV=development babel -w src/ -d ./",
+    "build:prod": "cross-env NODE_ENV=production babel src/ -d ./"
+  },
   "bugs": {
     "url": "https://github.com/facebookincubator/create-react-app/issues"
   },
@@ -51,5 +56,10 @@
     "sockjs-client": "1.1.4",
     "strip-ansi": "3.0.1",
     "text-table": "0.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-react-app": "^3.0.1",
+    "cross-env": "^5.0.1"
   }
 }
