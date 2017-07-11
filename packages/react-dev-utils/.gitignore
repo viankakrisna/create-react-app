@@ -1,6 +1,7 @@
 /FileSizeReporter.js
 /InterpolateHtmlPlugin.js
 /ModuleScopePlugin.js
+/ServiceWorkerUtils.js
 /WatchMissingNodeModulesPlugin.js
 /WebpackDevServerUtils.js
 /ansiHTML.js

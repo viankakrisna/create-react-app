@@ -8,6 +8,7 @@ packages/react-dev-utils/InterpolateHtmlPlugin.js
 packages/react-dev-utils/ModuleScopePlugin.js
 packages/react-dev-utils/WatchMissingNodeModulesPlugin.js
 packages/react-dev-utils/WebpackDevServerUtils.js
+packages/react-dev-utils/ServiceWorkerUtils.js
 packages/react-dev-utils/ansiHTML.js
 packages/react-dev-utils/checkRequiredFiles.js
 packages/react-dev-utils/clearConsole.js

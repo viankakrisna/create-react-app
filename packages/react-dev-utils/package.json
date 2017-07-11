@@ -29,11 +29,12 @@
     "inquirer.js",
     "InterpolateHtmlPlugin.js",
     "launchEditor.js",
-    "noopServiceWorkerMiddleware.js",
     "ModuleScopePlugin.js",
+    "noopServiceWorkerMiddleware.js",
     "openBrowser.js",
     "openChrome.applescript",
     "printHostingInstructions.js",
+    "ServiceWorkerUtils.js",
     "WatchMissingNodeModulesPlugin.js",
     "WebpackDevServerUtils.js",
     "webpackHotDevClient.js"

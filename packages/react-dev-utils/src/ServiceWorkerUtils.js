@@ -7,7 +7,7 @@
 
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
-
+'use strict';
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -18,7 +18,7 @@ const isLocalhost = Boolean(
     )
 );
 
-export default function register() {
+function register(options) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
@@ -30,24 +30,35 @@ export default function register() {
     }
 
     window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-
       if (!isLocalhost) {
         // Is not local host. Just register service worker
-        registerValidSW(swUrl);
+        registerValidSW(options);
       } else {
         // This is running on localhost. Lets check if a service worker still exists or not.
-        checkValidServiceWorker(swUrl);
+        checkValidServiceWorker(options);
       }
     });
   }
 }
 
-function registerValidSW(swUrl) {
+function registerValidSW({
+  swUrl,
+  onCached,
+  onUpdateFound,
+  onUpdateInstalled,
+  onRegisterSuccess,
+  onRegisterError,
+}) {
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
+      if (typeof onRegisterSuccess === 'function') {
+        onRegisterSuccess(registration);
+      }
       registration.onupdatefound = () => {
+        if (typeof onUpdateFound === 'function') {
+          onUpdateFound(registration);
+        }
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
@@ -57,11 +68,17 @@ function registerValidSW(swUrl) {
               // It's the perfect time to display a "New content is
               // available; please refresh." message in your web app.
               console.log('New content is available; please refresh.');
+              if (typeof onUpdateInstalled === 'function') {
+                onUpdateInstalled(registration);
+              }
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
               console.log('Content is cached for offline use.');
+              if (typeof onCached === 'function') {
+                onCached(registration);
+              }
             }
           }
         };
@@ -69,10 +86,14 @@ function registerValidSW(swUrl) {
     })
     .catch(error => {
       console.error('Error during service worker registration:', error);
+      if (typeof onRegisterError === 'function') {
+        onRegisterError(error);
+      }
     });
 }
 
-function checkValidServiceWorker(swUrl) {
+function checkValidServiceWorker(options) {
+  const { swUrl } = options;
   // Check if the service worker can be found. If it can't reload the page.
   fetch(swUrl)
     .then(response => {
@@ -89,20 +110,28 @@ function checkValidServiceWorker(swUrl) {
         });
       } else {
         // Service worker found. Proceed as normal.
-        registerValidSW(swUrl);
+        registerValidSW(options);
       }
     })
     .catch(() => {
+      if (typeof options.onOfflineLocalhost === 'function') {
+        options.onOfflineLocalhost();
+      }
       console.log(
         'No internet connection found. App is running in offline mode.'
       );
     });
 }
 
-export function unregister() {
+function unregister() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready.then(registration => {
       registration.unregister();
     });
   }
 }
+
+module.exports = {
+  register,
+  unregister,
+};
