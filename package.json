@@ -1,6 +1,7 @@
 {
   "private": true,
   "name": "react-scripts",
+  "version": "0.0.1",
   "scripts": {
     "build": "node packages/react-scripts/scripts/build.js",
     "changelog": "lerna-changelog",
