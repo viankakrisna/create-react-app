@@ -1,15 +1,15 @@
 {
   "private": true,
   "scripts": {
-    "build": "node packages/react-scripts/scripts/build.js",
+    "build": "node packages/react-scripts/bin/react-scripts build --debug",
     "changelog": "lerna-changelog",
     "create-react-app": "tasks/cra.sh",
     "e2e": "tasks/e2e-simple.sh",
     "e2e:docker": "tasks/local-test.sh",
     "postinstall": "node bootstrap.js && cd packages/react-error-overlay/ && npm run build:prod",
     "publish": "tasks/release.sh",
-    "start": "node packages/react-scripts/scripts/start.js",
-    "test": "node packages/react-scripts/scripts/test.js --env=jsdom",
+    "start": "node packages/react-scripts/bin/react-scripts start --debug",
+    "test": "node packages/react-scripts/bin/react-scripts test --env=jsdom",
     "format": "prettier --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'",
     "precommit": "lint-staged"
   },
