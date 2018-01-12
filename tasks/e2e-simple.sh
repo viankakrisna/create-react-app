@@ -226,6 +226,30 @@ function verify_module_scope {
   mv src/App.js.bak src/App.js
 }
 
+function verify_uglifyjs_error {
+  # Create stub dependency
+  echo "module.exports = class {}" >> node_modules/es6-sample.js
+  # Save App.js, we're going to modify it
+  cp src/App.js src/App.js.bak
+
+  # Add an es6 dependency
+  echo "import es6 from 'es6-sample'" | cat - src/App.js > src/App.js.temp && mv src/App.js.temp src/App.js
+
+  if `npm run build` | grep -xqFe "Failed to minify the code from this file: 
+
+ ./~/es6-sample.js line 1:0 
+
+Read more here: http://bit.ly/2tRViJ9" 
+  then
+    echo "matched"
+  else
+    exit 1
+  fi
+  # Restore App.js
+  rm src/App.js
+  mv src/App.js.bak src/App.js
+}
+
 # Enter the app directory
 cd test-app
 
@@ -284,6 +308,9 @@ verify_env_url
 
 # Test reliance on webpack internals
 verify_module_scope
+
+# Test reliance on uglifyjs error
+verify_uglifyjs_error
 
 # Cleanup
 cleanup
