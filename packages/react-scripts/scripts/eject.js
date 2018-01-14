@@ -249,8 +249,22 @@ inquirer
       //    updated the lockfile. So we might as well not do it while it's broken.
       //    https://github.com/facebookincubator/create-react-app/issues/2627
       //
-      // console.log(cyan('Running yarn...'));
-      // spawnSync('yarnpkg', [], { stdio: 'inherit' });
+      console.log(cyan('Running yarn...'));
+      const getYarnAddArguments = (dependencies, additionalFlag) =>
+        ['add']
+          .concat(additionalFlag)
+          .filter(Boolean)
+          .concat(
+            Object.keys(dependencies).map(dep => `${dep}@${dependencies[dep]}`)
+          );
+      spawnSync('yarnpkg', getYarnAddArguments(appPackage.dependencies), {
+        stdio: 'inherit',
+      });
+      spawnSync(
+        'yarnpkg',
+        getYarnAddArguments(appPackage.devDependencies, '--dev'),
+        { stdio: 'inherit' }
+      );
     } else {
       console.log(cyan('Running npm install...'));
       spawnSync('npm', ['install', '--loglevel', 'error'], {
