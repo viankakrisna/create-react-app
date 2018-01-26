@@ -169,6 +169,11 @@ class App extends Component {
           this.setFeature(f.default)
         );
         break;
+      case 'svg-in-css-inclusion':
+        import('./features/webpack/SvgInCssInclusion').then(f =>
+          this.setFeature(f.default)
+        );
+        break;
       case 'template-interpolation':
         import('./features/syntax/TemplateInterpolation').then(f =>
           this.setFeature(f.default)
