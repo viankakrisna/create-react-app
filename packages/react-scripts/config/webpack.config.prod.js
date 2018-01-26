@@ -311,6 +311,11 @@ module.exports = {
           // import { ReactComponent as Logo } from './logo.svg'; gives you a component.
           {
             test: /\.svg$/,
+            issuer: {
+              // This is to ensure that the svg file requested from css
+              // is not loaded using svgr
+              test: /\.(js|jsx|mjs)$/,
+            },
             use: [
               {
                 loader: require.resolve('babel-loader'),
