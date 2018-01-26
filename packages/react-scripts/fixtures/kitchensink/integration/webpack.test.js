@@ -71,6 +71,14 @@ describe('Integration', () => {
       );
     });
 
+    it('svg in css inclusion', async () => {
+      const doc = await initDOM('feature-svg-in-css-inclusion');
+
+      expect(
+        doc.getElementsByTagName('style')[0].textContent.replace(/\s/g, '')
+      ).to.match(/\/static\/media\/logo\..+\.svg$/);
+    });
+
     it('unknown ext inclusion', async () => {
       const doc = await initDOM('unknown-ext-inclusion');
 
