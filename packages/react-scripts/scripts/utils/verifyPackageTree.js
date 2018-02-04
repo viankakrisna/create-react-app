@@ -11,11 +11,13 @@
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
+const verifyYarnIntegrity = require('./verifyYarnIntegrity');
 
 // We assume that having wrong versions of these
 // in the tree will likely break your setup.
 // This is a relatively low-effort way to find common issues.
 function verifyPackageTree() {
+  verifyYarnIntegrity();
   const depsToCheck = [
     // These are packages most likely to break in practice.
     // See https://github.com/facebook/create-react-app/issues/1795 for reasons why.
